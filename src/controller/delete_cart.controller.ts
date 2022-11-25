@@ -19,12 +19,12 @@ const resourceName = "userCart";
 export async function deleteCart(req: any, res: Response<GenericServiceResponse | GenericServiceErrorResponse>){
   const {userId} = req.params
 
-  if(!userId || typeof userId != "number"){
+  if(!userId){
     return res.status(400).json(status400BadRequest(`Invalid userId param (${userId})`))
   }
 
   try {
-    const deletedCart = await model.findByIdAndDelete({userId: userId})
+    const deletedCart = await model.findOneAndDelete({userId: userId})
     if(!deletedCart){
       return res.status(404).json(status404NotFound(resourceName, "Invalid userId consulted"))
     }
