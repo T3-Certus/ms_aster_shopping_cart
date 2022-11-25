@@ -28,6 +28,6 @@ const port = PORT || 3000
 
 // routes
 app.get('/', (req, res)=> res.send('MS Shopping Cart'))
-app.use('/v1', router)
+app.use('/v1', verifyAccessToken, router)
 
 export {app, port}
